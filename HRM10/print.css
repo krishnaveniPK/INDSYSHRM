@@ -1,0 +1,10 @@
+@media print {
+    @page {
+      margin: 0; /* Set page margins as desired */
+      size: auto; /* Set page size as desired */
+    }
+    
+    .no-print {
+      display: none !important; /* Hide elements with the "no-print" class */
+    }
+  }

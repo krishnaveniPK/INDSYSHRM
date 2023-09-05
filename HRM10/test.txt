@@ -1,0 +1,41 @@
+function s() {
+        var e;
+        document.querySelectorAll(".navbar-nav .collapse") && (e = document.querySelectorAll(".navbar-nav .collapse"),
+        Array.from(e).forEach(function(t) {
+            var a = new bootstrap.Collapse(t,{
+                toggle: !1
+            });
+            t.addEventListener("show.bs.collapse", function(e) {
+                e.stopPropagation();
+                var e = t.parentElement.closest(".collapse");
+                e ? (e = e.querySelectorAll(".collapse"),
+                Array.from(e).forEach(function(e) {
+                    e = bootstrap.Collapse.getInstance(e);
+                    e !== a && e.hide()
+                })) : (e = function(e) {
+                    for (var t = [], a = e.parentNode.firstChild; a; )
+                        1 === a.nodeType && a !== e && t.push(a),
+                        a = a.nextSibling;
+                    return t
+                }(t.parentElement),
+                Array.from(e).forEach(function(e) {
+                    2 < e.childNodes.length && e.firstElementChild.setAttribute("aria-expanded", "false");
+                    e = e.querySelectorAll("*[id]");
+                    Array.from(e).forEach(function(e) {
+                        e.classList.remove("show"),
+                        2 < e.childNodes.length && (e = e.querySelectorAll("ul li a"),
+                        Array.from(e).forEach(function(e) {
+                            e.hasAttribute("aria-expanded") && e.setAttribute("aria-expanded", "false")
+                        }))
+                    })
+                }))
+            }),
+            t.addEventListener("hide.bs.collapse", function(e) {
+                e.stopPropagation();
+                e = t.querySelectorAll(".collapse");
+                Array.from(e).forEach(function(e) {
+                    (childCollapseInstance = bootstrap.Collapse.getInstance(e)).hide()
+                })
+            })
+        }))
+    }
