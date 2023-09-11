@@ -126,15 +126,15 @@
                                                                         <td>
                                                                             <div class="input-group ">
                                                                                 <input type="text" class="form-control"
-                                                                                    ng-model="searchEmployee.Smsverified">
+                                                                                    ng-model="searchEmployee.Smsverified" placeholder="">
 
                                                                             </div>
                                                                         </td>
                                                                         <td colspan="2">
                                                                             <div class="input-group ">
                                                                                 <input type="text" class="form-control"
-                                                                                    ng-model="searchEmployee.Emailverified"
-                                                                                    autocomplete="off">
+                                                                                    ng-model="searchEmployesse.Emailverified02"
+                                                                                    autocomplete="off"  autocapitalize="off">
 
                                                                             </div>
                                                                         </td>

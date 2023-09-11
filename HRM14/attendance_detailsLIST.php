@@ -207,12 +207,7 @@ Register of Adult Workers Men/Women Attendance Report for the Month of <?php ech
 $start_date = date_create($fdaymonth);
 $end_date = date_create($ldaymonth)->modify("+1 second");;
 $interval = new DateInterval("P1D");
-$date_range = new DatePeriod(
-    $start_date,
-    $interval,
-
-    $end_date
-); //echo "<pre>";print_r($date_range);exit;
+$date_range = new DatePeriod($start_date, $interval,$end_date); //echo "<pre>";print_r($date_range);exit;
 foreach ($date_range as $rowdate) {
     // echo $rowdate->format("d-m-Y");
     // echo "<br>";

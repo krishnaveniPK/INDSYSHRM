@@ -172,6 +172,8 @@ try
     $Fresher=$form_data["Fresher"];
     $ExpectedCTC=$form_data["ExpectedCTC"];
     $PreviousCTC=$form_data["PreviousCTC"];
+    $Otherallowance=$form_data["Otherallowance"];
+    $Experience = $form_data["Experience"];
 
     
     if(empty($Firstname))
@@ -197,11 +199,6 @@ try
      echo trim($str, '"');
      return;
     }
-
-
-    
-
-
     if(empty($Qualification))
     {
   
@@ -246,6 +243,11 @@ try
      echo trim($str, '"');
      return;
     }
+
+    if(empty($Otherallowance))
+    {
+      $Otherallowance=0;
+    }
   /*   
   $testfn =  
               */
@@ -269,9 +271,9 @@ try
   
     else
     {
-      $sqlsave = "INSERT IGNORE INTO indsys1032jobappmaster (Clientid,Applicationid,Title,Firstname,Fullname,Lastname,Mother_tong,Gender,Contactno,Userid,Addormodifydatetime,Type_Of_Posistion,Emaild,HighestQualification,Marital_status,Selectionstatus,PoistionApplicant,Appdate,Intervdate,interviewtime,Smsverified,Emailverified,Candidateid,Movedtocandidate,Fresher,ExpectedCTC,PreviousCTC)
+      $sqlsave = "INSERT IGNORE INTO indsys1032jobappmaster (Clientid,Applicationid,Title,Firstname,Fullname,Lastname,Mother_tong,Gender,Contactno,Userid,Addormodifydatetime,Type_Of_Posistion,Emaild,HighestQualification,Marital_status,Selectionstatus,PoistionApplicant,Appdate,Intervdate,interviewtime,Smsverified,Emailverified,Candidateid,Movedtocandidate,Fresher,ExpectedCTC,PreviousCTC,Otherallowance,Experience)
 
-      values('$Clientid','$Applicationid','$Title','$Firstname','$fullname','$Lastname','$Mothertongue','$Gender','$Contactno','$user_id','$date','$Category','$Emailid','$Qualification','$Married','$Selectionstatus','$Vaccancy','$ApplicationDate','$InterviewDate','$Interviewtime','No','No',0,'No','$Fresher','$ExpectedCTC','$PreviousCTC')";
+      values('$Clientid','$Applicationid','$Title','$Firstname','$fullname','$Lastname','$Mothertongue','$Gender','$Contactno','$user_id','$date','$Category','$Emailid','$Qualification','$Married','$Selectionstatus','$Vaccancy','$ApplicationDate','$InterviewDate','$Interviewtime','No','No',0,'No','$Fresher','$ExpectedCTC','$PreviousCTC','$Otherallowance','$Experience')";
   
       $resultsave = mysqli_query($conn,$sqlsave);
      
@@ -335,13 +337,16 @@ try
             $Fresher=$row['Fresher'];
             $ExpectedCTC = $row['ExpectedCTC'];
             $PreviousCTC = $row['PreviousCTC'];
+            $Otherallowance = $row['Otherallowance'];
+            $Experience = $row['Experience'];
+            $Candidatephoto = $row['Candidatephoto'];
            
              
       } 
     }
     $Display=array(
         
-        'Title'=>  $Title,
+      'Title'=>  $Title,
       'Firstname'=> $Firstname,
       'Lastname'=>  $Lastname,
       'Gender'=> $Gender,
@@ -361,7 +366,10 @@ try
       'Emailverified' =>$Emailverified,
       'Fresher' =>$Fresher,
       'ExpectedCTC' =>$ExpectedCTC,
-      'PreviousCTC' =>$PreviousCTC
+      'PreviousCTC' =>$PreviousCTC,
+      'Otherallowance' =>$Otherallowance,
+      'Experience' =>$Experience,
+      'Candidatephoto' =>$Candidatephoto
        
   );
    
@@ -438,6 +446,8 @@ try
     $Fresher=$form_data["Fresher"];
     $ExpectedCTC=$form_data["ExpectedCTC"];
     $PreviousCTC=$form_data["PreviousCTC"];
+    $Otherallowance= $form_data["Otherallowance"];
+    $Experience=$form_data["Experience"];
     
 
 
@@ -508,8 +518,7 @@ try
      echo trim($str, '"');
      return;
     }
-/*   
-$testfn =              */
+
 
 
 
@@ -538,10 +547,9 @@ $testfn =              */
   PoistionApplicant='$Vaccancy',
   Fresher ='$Fresher',
   ExpectedCTC ='$ExpectedCTC',
-  PreviousCTC='$PreviousCTC'
- 
-
-    
+  PreviousCTC='$PreviousCTC',
+  Otherallowance='$Otherallowance',
+  Experience='$Experience'    
      WHERE Applicationid = '$Applicationid' AND Clientid ='$Clientid' ";
   $resultExists01 = $conn->query($resultExists);
   $Message ="Update";
@@ -834,9 +842,10 @@ if($MethodGet == 'MoveToCandidate')
             $Fresher=$row['Fresher'];
             $ExpectedCTC = $row['ExpectedCTC'];
             $PreviousCTC = $row['PreviousCTC'];
-$Candidateid = "0";
+            $Experience = $row['Experience'];
+            $Candidateid = "0";
 
-$fullname = "$Firstname $Lastname"; 
+            $fullname = "$Firstname $Lastname"; 
             $GetNextno = "SELECT * FROM indsys1008mastermodule where ModuleID ='CAN' AND Clientid ='$Clientid'  ";
             
             $result_Nextno = $conn->query($GetNextno);
@@ -852,28 +861,32 @@ $fullname = "$Firstname $Lastname";
             }
 
 
-            $sqlsave = "INSERT IGNORE INTO indsys1013candidatemaster (Clientid,Candidateid,Title,Firstname,Fullname,Lastname,Mother_tong,Gender,Contactno,Userid,Addormodifydatetime,Type_Of_Posistion,Emaild,HighestQualification,Marital_status,Selectionstatus,ApplicationDate,Interview_held_On,Previous_sainmarks_emp,Designationproposed,Availableoninterview,Fresher,ExpectedCTC,PreviousCTC,MD_Approve,HR_Approve,GM_Approve,DH_Approve,Accepted_By_Candidate,Candidateinterviewtime)
-            values('$Clientid','$Candidateid','$Title','$Firstname','$fullname','$Lastname','$Mothertongue','$Gender','$Contactno','$user_id','$date','$Category','$Emailid','$Qualification','$Married','Pending','$ApplicationDate','$InterviewDate','No','$Vaccancy','$InterviewDate','$Fresher','$ExpectedCTC','$PreviousCTC','Pending','Pending','Pending','Pending','Pending','$Interviewtime')";
+            $sqlsave = "INSERT IGNORE INTO indsys1013candidatemaster (Clientid,Candidateid,Title,Firstname,Fullname,Lastname,Mother_tong,Gender,Contactno,Userid,Addormodifydatetime,Type_Of_Posistion,Emaild,HighestQualification,Marital_status,Selectionstatus,ApplicationDate,Interview_held_On,Previous_sainmarks_emp,Designationproposed,Availableoninterview,Fresher,ExpectedCTC,PreviousCTC,MD_Approve,HR_Approve,GM_Approve,DH_Approve,Accepted_By_Candidate,Candidateinterviewtime,Expereienced)
+            values('$Clientid','$Candidateid','$Title','$Firstname','$fullname','$Lastname','$Mothertongue','$Gender','$Contactno','$user_id','$date','$Category','$Emailid','$Qualification','$Married','Pending','$ApplicationDate','$InterviewDate','No','$Vaccancy','$InterviewDate','$Fresher','$ExpectedCTC','$PreviousCTC','Pending','Pending','Pending','Pending','Pending','$Interviewtime','$Experience')";
         
             $resultsave = mysqli_query($conn,$sqlsave);
            
-        
+        if($resultsave===TRUE)
+        {
             $UpdateNextno = "Update indsys1008mastermodule set Nextno = '$Candidateid' where ModuleID ='CAN' AND Clientid ='$Clientid'";
             $resultUpdate = mysqli_query($conn,$UpdateNextno);
-
-
+            Clonecandidateimage($conn,$Clientid,$Applicationid,$Candidateid);
             $resultExists = "Update indsys1032jobappmaster set 
-
             Selectionstatus='Close',
             Movedtocandidate='Yes',
             Userid = '$user_id',
             Candidateid ='$Candidateid',
             Addormodifydatetime='$date'   
-     WHERE Applicationid = '$Applicationid' AND Clientid ='$Clientid'";
-  $resultExists01 = $conn->query($resultExists);
-  
- 
+            WHERE Applicationid = '$Applicationid' AND Clientid ='$Clientid'";
+            $resultExists01 = $conn->query($resultExists);
+            if($resultExists01===TRUE)
+            {
+            
+            }
             $Message ="MovedToCandidate";
+        }
+ 
+           
            
              
       } 
@@ -899,6 +912,52 @@ $fullname = "$Firstname $Lastname";
   }
 
 //////////////////////////////////////
+
+function Clonecandidateimage($conn,$Clientid,$Applicationid,$Candidateid)
+{
+  try
+  {
+    $Fetchimagepath ="SELECT * FROM indsys1032jobappmaster Where Clientid='$Clientid' AND Applicationid='$Applicationid'";
+    $fetchresult = $conn->query($Fetchimagepath);
+
+    if(mysqli_num_rows($fetchresult)>0)
+    {
+      while(($row=mysqli_fetch_array($fetchresult)))
+      {
+        $Candidatephoto = $row['Candidatephoto'];
+      }
+      $destinationfile ="";
+      if($Candidatephoto !=null)
+      {
+      $test = pathinfo($Candidatephoto); 
+      $last_image_path =$test['basename'];
+
+      $directory3 = "../$Clientid/";
+      $directory4 = "../$Clientid/CANIMAGE/";
+     
+      $directory = "../$Clientid/CANIMAGE/$Candidateid/";
+      if(!is_dir($directory3)){mkdir($directory3, 0777);}
+      if(!is_dir($directory4)){mkdir($directory4, 0777);}
+    
+    
+      if(!is_dir($directory)){mkdir($directory, 0777);}
+      $destinationfile ="$directory$last_image_path";
+     
+      copy($Candidatephoto, $destinationfile);
+
+      $Executequery = "UPDATE indsys1013candidatemaster SET Candidatephoto='$destinationfile' Where Clientid='$Clientid' AND Candidateid='$Candidateid'";
+      $Updateqryresult = $conn->query($Executequery);
+      }
+
+
+    }
+
+  }
+  catch(Exception $E)
+  {
+
+  }
+}
 
 
 
@@ -1129,23 +1188,13 @@ catch(phpmailerException $e)
   if($MethodGet == 'Contactnounique')
   {
   
-
+  
   try
   {
       
 
       $Contactno=$form_data["Contactno"];
-
-      
-      if (strlen($Contactno) < 10) {
-        $Message ="InternalNumberless";
   
-  
-        $Display=array('Message' =>$Message);
-        $str = json_encode($Display);
-        echo trim($str, '"');
-        return;
-      }
       
 
       $internalMobile = "SELECT * FROM indsys1035internalmobilenumbers WHERE Contactno = '$Contactno' LIMIT 1";
@@ -1154,8 +1203,6 @@ catch(phpmailerException $e)
       if(mysqli_fetch_row($resultinternalMobile))
       {
         $Message ="InternalNumberYes";
-
-
         $Display=array('Message' =>$Message);
         $str = json_encode($Display);
         echo trim($str, '"');
@@ -1192,10 +1239,7 @@ catch(phpmailerException $e)
       {
         
      }
-
     
-  
-   
 
      $Display=array('Message' =>$Message);
     
@@ -1277,4 +1321,21 @@ catch(phpmailerException $e)
      echo json_encode($data01);
    }
    ////////////////////////
+   if($MethodGet == 'Maritalstatus')
+   {
+      $GetState = "SELECT * FROM indsys1060maritalstatus where  Clientid ='$Clientid'  ORDER BY Maritalstatus";
+       $result_Region = $conn->query($GetState);
+     
+       if(mysqli_num_rows($result_Region) > 0) { 
+       while($row = mysqli_fetch_array($result_Region)) {  
+         $data01[] = $row;
+         } 
+       }
+       
+       
+       header('Content-Type: application/json');
+       echo json_encode($data01);
+    
+   }
+   ///////////////////////////
  ?>

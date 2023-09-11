@@ -1220,6 +1220,13 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
                 'Address': $scope.Address,
                 'ApplicationDate': $scope.ApplicationDate,
                 'Availableoninterview': $scope.Availableoninterview,
+                'Reportingname': $scope.Reportingname,
+                'ReportingToid': $scope.ReportingToid,
+                'Business': $scope.Business,
+                'Designationproposed': $scope.Designationproposed,
+                'Location': $scope.Location,
+                'Department': $scope.Department,
+
 
                 'Method': 'UpdatOtherInfo'
             },
@@ -1560,6 +1567,8 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
             $scope.UniversityorSchool = "";
             $scope.GradeorPercentage = "";
             $scope.Passoutyear = "";
+            $scope.EducationMode = "";
+            $scope.Specialization = "";
             $scope.DisplayCandidateEducation();
             $scope.CandidateEduNextno();
         }
@@ -1619,6 +1628,9 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
             form_data.append("UniversityorSchool", $("#UniversityorSchool").val());
             form_data.append("GradeorPercentage", $("#GradeorPercentage").val());
             form_data.append("Passoutyear", $("#Passoutyear").val());
+            form_data.append("Specialization", $("#Specialization").val());
+            form_data.append("EducationMode", $("#EducationMode").val());
+          
             form_data.append("EduNextno", $("#EduNextno").val());
 
             //  alert($("#Documenttype").val());
@@ -1674,6 +1686,8 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
                 'UniversityorSchool': $scope.UniversityorSchool,
                 'GradeorPercentage': $scope.GradeorPercentage,
                 'Passoutyear': $scope.Passoutyear,
+                'EducationMode' :$scope.EducationMode,
+                'Specialization' :$scope.Specialization,
 
 
                 'Method': 'EDUCATIONCAN'
@@ -1776,6 +1790,8 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
                 $scope.GradeorPercentage = response.data.GradeorPercentage;
                 $scope.Passoutyear = response.data.Passoutyear;
                 $scope.Candidatedocument = response.data.Candidatedocument;
+                $scope.EducationMode = response.data.EducationMode;
+                $scope.Specialization = response.data.Specialization;
 
             });
         }
@@ -4198,4 +4214,51 @@ app.controller('HRM09Controller', function($scope, $http, $timeout, $filter, $wi
       
     });
     ///////////////////////
+    $http({
+        method: "POST",
+        url: "../HRM22/job.php",
+        data: { 'Method': 'Maritalstatus' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).then(function successCallback(response) {
+        $scope.GetMaritalstatusList = response.data;
+    });
+    ///////////////////////
+    $http({
+        method: "POST",
+        url: "Candidate.php",
+        data: { 'Method': 'BLOODGROUP' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).then(function successCallback(response) {
+
+     
+        $scope.GetBloodGroupList = response.data;
+      
+    });
+    /////////////////////////
+    $http({
+        method: "POST",
+        url: "Candidate.php",
+        data: { 'Method': 'EDUCATIONMODE' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).then(function successCallback(response) {
+
+     
+        $scope.GetEducationModeList = response.data;
+      
+    });
+    $http({
+        method: "POST",
+        url: "Candidate.php",
+        data: { 'Method': 'SPECIALIZATION' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).then(function successCallback(response) {
+
+     
+        $scope.GetSpecializationList = response.data;
+      
+    });
 });

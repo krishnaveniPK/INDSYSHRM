@@ -19,10 +19,10 @@
 
         <?php include '../headerin.php'?>
         <?php include '../Sidebarin.php'?>
-        <div class="dashboard-wrapper" ng-App="MyApp" ng-controller="HRM09Controller" style="overflow: hidden;">
-            <div class="dashboard-content">
+        <div class="dashboard-wrapper" ng-App="MyApp" ng-controller="HRM09Controller">
+            <div class="container-fluid dashboard-content">
 
-                <div id="myCarousel" class="carousel slide" data-interval="false" style="overflow= auto;">
+                <div id="myCarousel" class="carousel slide" data-interval="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row">
@@ -42,10 +42,10 @@
                                                 <tr>
 
                                                     <th>No</th>
-                                                    <th scope="col" >
+                                                    <th scope="col">
                                                         ID</th>
                                                     <th scope="col" style="width: 250px;">Name</th>
-                                                    <th scope="col" >Gender</th>
+                                                    <th scope="col">Gender</th>
                                                     <th scope="col">Contactno</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Qualification</th>
@@ -56,9 +56,9 @@
                                                 <tr>
                                                     <td colspan="2">
                                                         <div class="input-group ">
-                                                            <input type="text" class="form-control" placeholder="Search" 
+                                                            <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Candidateid">
-                                                            
+
                                                         </div>
 
                                                     </td>
@@ -66,42 +66,42 @@
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Fullname">
-                                                            
+
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Gender">
-                                                           
+
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Contactno">
-                                                           
+
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Type_Of_Posistion">
-                                                            
+
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.HighestQualification">
-                                                            
+
                                                         </div>
                                                     </td>
                                                     <td colspan="2">
                                                         <div class="input-group ">
                                                             <input type="text" class="form-control" placeholder="Search"
                                                                 ng-model="searchCandidate.Selectionstatus">
-                                                            
+
                                                         </div>
                                                     </td>
 
@@ -196,9 +196,8 @@
                                                                     ng-model="Title">
                                                                     <option Value="Mr.">Mr.</option>
                                                                     <option value="Mrs.">Mrs.</option>
-                                                                    <option value="Miss.">Miss.</option>
                                                                     <option value="Ms.">Ms.</option>
-                                                                    <option value="Shri.">Shri.</option>
+                                                                  
                                                                 </select></span>
                                                             <input type="text" placeholder="Firstname"
                                                                 class="form-control" ng-model="Firstname">
@@ -216,28 +215,9 @@
                                                     <div class="form-group col-md-4">
                                                         <label class="col-form-label">Status</label>
 
-                                                        <input type="text" class="form-control" ng-model="Selectionstatus"
-                                                    autocomplete="off"  readonly >
-                                                        <!-- <select class="form-control" ng-model="Selectionstatus">
-                                                            <option Value="Appointed">Appointed</option>
-                                                            <option value="Pending">Pending</option>
-                                                            <option value="Rejected">Rejected</option>
-                                                            <option value="Offer Letter Sent">Offer Letter Sent
-                                                            </option>
-                                                            <option Value="Waiting For candidate Approval">
-                                                                Waiting For Candidate Approval</option>
-                                                            <option value="Waiting For MD Approval">Waiting For
-                                                                MD Approval</option>
-                                                            <option value="Offer Accepted By Candidate">Offer
-                                                                Accepted by Candidate
-                                                            </option>
-                                                            <option value="Offer Rejected by Candidate">Offer
-                                                                Rejected by Candidate
-                                                            </option>
-                                                            <option value="Onboarding">Onboarding</option>
-                                                            <option value="Induction">Induction</option>
+                                                        <input type="text" class="form-control"
+                                                            ng-model="Selectionstatus" autocomplete="off" readonly>
 
-                                                        </select> -->
 
                                                     </div>
 
@@ -267,10 +247,11 @@
                                             </div>
 
                                             <div class="form-group col-md-3">
-                                                <label class="col-form-label">Married</label>
+                                                <label class="col-form-label">Marital Status</label>
                                                 <select class="form-control" ng-model="Married">
-                                                    <option Value="Yes">Yes</option>
-                                                    <option value="No">No</option>
+                                                    <option ng-repeat="s in GetMaritalstatusList "
+                                                        value="{{s.Maritalstatus}}">
+                                                        {{s.Maritalstatus}}</option>
 
                                                 </select>
                                             </div>
@@ -335,8 +316,8 @@
                                             <button class="btn btn-sm btn-rounded btn-primary"
                                                 ng-click="FetchCandidate(Candidateid);"><i class="fa fa-refresh"></i>
                                                 Refresh</button>
-                                            <button class="btn btn-sm btn-rounded btn-info" ng-click="MovetoEmp();"><i
-                                                    class="fa fa-arrows"></i>
+                                            <button ng-show="btnMoveToEmp" class="btn btn-sm btn-rounded btn-info"
+                                                ng-click="MovetoEmp();"><i class="fa fa-arrows"></i>
                                                 Move To Emp</button>
                                             <button class="btn btn-sm btn-rounded btn-warning" data-target="#myCarousel"
                                                 data-slide-to="0"><i class="fa  fa-arrow-left"></i> Back</button>
@@ -352,22 +333,18 @@
                                                         href="#menu2">Pre(sainmarks)</a></li>
                                                 <li class="nav-item" ng-show="btnfresherno"><a data-toggle="tab"
                                                         href="#menu8">PresentWorking</a></li>
-                                                <li class="nav-item"><a data-toggle="tab" href="#menu10">Vaccination</a>
+                                                <li class="nav-item"><a data-toggle="tab" href="#menu9">Vaccination</a>
                                                 </li>
 
-                                                <li class="nav-item"><a data-toggle="tab" href="#menu3">Interview </a>
-                                                </li>
+                                                <li class="nav-item"><a data-toggle="tab" href="#menu3">Report</a></li>
                                                 <li class="nav-item"><a data-toggle="tab" href="#menu4">Status</a></li>
-                                                <li class="nav-item"><a data-toggle="tab" href="#menu9">Reporting</a>
-                                                </li>
-
+                     
 
                                                 <li class="nav-item"><a data-toggle="tab" href="#menu7">Fitment</a></li>
 
                                                 <li class="nav-item"><a data-toggle="tab" href="#menu5">Appointment </a>
                                                 </li>
-                                                <li class="nav-item"><a data-toggle="tab" href="#menu11">Letters
-                                                    </a></li>
+                                                <li class="nav-item"><a data-toggle="tab" href="#menu11">Letters</a></li>
 
 
                                             </ul>
@@ -433,8 +410,16 @@
                                                                     <div class="form-group col-md-3">
                                                                         <label class="col-form-label">Blood
                                                                             Group</label>
-                                                                        <input type="text" class="form-control"
-                                                                            ng-model="Bloodgroup" autocomplete="off">
+
+                                                                        <select class="form-control"
+                                                                            ng-model="Bloodgroup">
+                                                                            <option
+                                                                                ng-repeat="s in GetBloodGroupList "
+                                                                                value="{{s.BloodGroup}}">
+                                                                                {{s.BloodGroup}}</option>
+
+                                                                        </select>
+
                                                                     </div>
                                                                     <div class="form-group col-md-3">
                                                                         <label class="col-form-label">Fresher</label>
@@ -451,8 +436,7 @@
 
                                                                     <div class="form-group col-md-3"
                                                                         ng-show="btnfresherno">
-                                                                        <label
-                                                                            class="col-form-label">Expereience</label>
+                                                                        <label class="col-form-label">Experience</label>
                                                                         <input type="text" class="form-control"
                                                                             ng-model="Expereience" autocomplete="off">
                                                                     </div>
@@ -505,20 +489,66 @@
 
                                                                     </div>
                                                                     <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Reporting
+                                                                    To</label>
+                                                                <select ng-model="ReportingToid" class="form-control"
+                                                                    ng-change="GetReporterName();">
+
+                                                                    <option ng-repeat="s in GetinterviewerList "
+                                                                        value="{{s.Employeeid}}">
+                                                                        {{s.Title}}
+                                                                        {{s.Fullname}}-{{s.Employeeid}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Business</label>
+                                                                <input class="form-control" ng-model="Business" />
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Designation
+                                                                    Proposed </label>
+                                                                <select ng-model="Designationproposed"
+                                                                    class="form-control">
+
+                                                                    <option ng-repeat="s in GetDesignationList "
+                                                                        value="{{s.Designation}}">
+                                                                        {{s.Designation}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Location</label>
+                                                                <select ng-model="Location" class="form-control">
+
+                                                                    <option ng-repeat="s in GetCityList "
+                                                                        value="{{s.City}}">
+                                                                        {{s.City}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Department</label>
+                                                                <select ng-model="Department" class="form-control">
+
+                                                                    <option ng-repeat="s in GetDepartmentList "
+                                                                        value="{{s.Department}}">
+                                                                        {{s.Department}}</option>
+                                                                </select>
+                                                            </div>
+                                                                    <!-- <div class="form-group col-md-3">
                                                                         <label class="col-form-label">Available
                                                                             on Interview</label>
                                                                         <input type="text" class="form-control"
                                                                             ng-model="Availableoninterview"
                                                                             onfocus="(this.type='date')"
                                                                             onblur="(this.type='date')">
-                                                                    </div>
+                                                                    </div> -->
 
 
-                                                                    <div class="form-group col-md-9">
+                                                                    <!-- <div class="form-group col-md-9">
                                                                         <label class="col-form-label">Address</label>
                                                                         <textarea class="form-control"
                                                                             ng-model="Address"></textarea>
-                                                                    </div>
+                                                                    </div> -->
 
 
 
@@ -586,7 +616,7 @@
                                                                     id="GradeorPercentage" />
                                                             </div>
                                                             <div class="form-group col-md-3">
-                                                                <label class="col-form-label">Passout-Year
+                                                                <label class="col-form-label">Passout Year
                                                                 </label>
                                                                 <select class="form-control" ng-model="Passoutyear"
                                                                     id="Passoutyear">
@@ -597,8 +627,29 @@
                                                                                          ?>
                                                                 </select>
                                                             </div>
+
                                                             <div class="form-group col-md-3">
-                                                                <label class="col-form-label">Select_file</label>
+                                                                <label class="col-form-label">Education Mode</label>
+                                                                <select ng-model="EducationMode" id="EducationMode"
+                                                                    class="form-control">
+
+                                                                    <option ng-repeat="s in GetEducationModeList "
+                                                                        value="{{s.EducationMode}}">
+                                                                        {{s.EducationMode}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Specialization</label>
+                                                                <select ng-model="Specialization" id="Specialization"
+                                                                    class="form-control">
+
+                                                                    <option ng-repeat="s in GetSpecializationList "
+                                                                        value="{{s.Specialization}}">
+                                                                        {{s.Specialization}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="col-form-label">Select file</label>
                                                                 <div class="input-group">
                                                                     <input type="file" class="form-control"
                                                                         ng-model="clearinput" id="fileInput"
@@ -614,7 +665,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="form-group text-right col-md-6">
+                                                            <div class="form-group text-right col-md-12">
                                                                 <button style="margin-top: 25px;"
                                                                     class="btn btn-sm btn-success"
                                                                     ng-click="Update_Education();"><i
@@ -855,16 +906,16 @@
                                                                     onblur="(this.type='time')">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label
-                                                                    class="col-form-label">Reschedule_interview_date</label>
+                                                                <label class="col-form-label">Reschedule interview
+                                                                    date</label>
                                                                 <input type="text" class="form-control"
                                                                     ng-model="Reschedule_interview"
                                                                     onfocus="(this.type='date')"
                                                                     onblur="(this.type='date')">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label
-                                                                    class="col-form-label">Reschedule_interview_reason</label>
+                                                                <label class="col-form-label">Reschedule interview
+                                                                    reason</label>
                                                                 <input type="text" class="form-control"
                                                                     ng-model="Reschedule_interview_reason">
                                                             </div>
@@ -1105,8 +1156,6 @@
                                                 </div>
 
                                             </div>
-
-
                                             <div id="menu7" class="tab-pane fade">
                                                 <div class="card">
                                                     <h4 class="card-header text-green pl-0">Salary
@@ -1339,7 +1388,6 @@
 
                                             </div>
 
-
                                             <div id="menu8" class="tab-pane fade">
 
                                                 <div class="noshadow">
@@ -1441,52 +1489,7 @@
                                                     <div class="">
                                                         <div class="row">
 
-                                                            <div class="form-group col-md-4">
-                                                                <label class="col-form-label">Reporting
-                                                                    To</label>
-                                                                <select ng-model="ReportingToid" class="form-control"
-                                                                    ng-change="GetReporterName();">
-
-                                                                    <option ng-repeat="s in GetinterviewerList "
-                                                                        value="{{s.Employeeid}}">
-                                                                        {{s.Title}}
-                                                                        {{s.Fullname}}-{{s.Employeeid}}
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label class="col-form-label">Business</label>
-                                                                <input class="form-control" ng-model="Business" />
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label class="col-form-label">Designation
-                                                                    Proposed </label>
-                                                                <select ng-model="Designationproposed"
-                                                                    class="form-control">
-
-                                                                    <option ng-repeat="s in GetDesignationList "
-                                                                        value="{{s.Designation}}">
-                                                                        {{s.Designation}}</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label class="col-form-label">Location</label>
-                                                                <select ng-model="Location" class="form-control">
-
-                                                                    <option ng-repeat="s in GetCityList "
-                                                                        value="{{s.City}}">
-                                                                        {{s.City}}</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-4">
-                                                                <label class="col-form-label">Department</label>
-                                                                <select ng-model="Department" class="form-control">
-
-                                                                    <option ng-repeat="s in GetDepartmentList "
-                                                                        value="{{s.Department}}">
-                                                                        {{s.Department}}</option>
-                                                                </select>
-                                                            </div>
+                                                           
                                                             <div class="form-group col-md-4">
 
                                                                 <button class="btn btn-sm btn-success"

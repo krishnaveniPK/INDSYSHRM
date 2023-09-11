@@ -27,7 +27,7 @@
                         <div class="">
                             <div class="">
                                 <div class="" id="basicform">
-                                   
+
                                     <div id="myCarousel" class="carousel slide" data-interval="false">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
@@ -35,11 +35,12 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
 
- <h5 class="text-green">Candidate Details
-                                                                </h5><hr/>
+                                                            <h5 class="text-green">Candidate Details
+                                                            </h5>
+                                                            <hr />
 
                                                             <div class="">
-                                                               
+
 
 
 
@@ -68,59 +69,66 @@
                                                                                 <tr class="searchin">
                                                                                     <td colspan="2">
                                                                                         <div class="input-group ">
-                                                                                            <input type="text" placeholder="Search" 
+                                                                                            <input type="text"
+                                                                                                placeholder="Search"
                                                                                                 class="form-control"
                                                                                                 ng-model="searchCandidate.Candidateid">
-                                                                                            
+
                                                                                         </div>
 
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.Fullname">
-                                                                                           
+
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.Gender">
-                                                                                            
+
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.Contactno">
-                                                                                           
+
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.Type_Of_Posistion">
-                                                                                            
+
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.HighestQualification">
-                                                                                            
+
                                                                                         </div>
                                                                                     </td>
                                                                                     <td colspan="2">
                                                                                         <div class="input-group ">
                                                                                             <input type="text"
-                                                                                                class="form-control" placeholder="Search" 
+                                                                                                class="form-control"
+                                                                                                placeholder="Search"
                                                                                                 ng-model="searchCandidate.Selectionstatus">
-                                                                                           
+
                                                                                         </div>
                                                                                     </td>
 
@@ -285,7 +293,7 @@
 
                                                                         <div class="form-group col-md-3">
                                                                             <label
-                                                                                class="col-form-label">Married</label>
+                                                                                class="col-form-label">Marital Status</label>
                                                                             <input type="text" class="form-control"
                                                                                 ng-model="Married" autocomplete="off"
                                                                                 readonly>
@@ -1148,7 +1156,7 @@
                                                                                                             class="bg-green text-white">
 
                                                                                                             <th>#</th>
-                                                                                                            
+
                                                                                                             <th>FitStatus
                                                                                                             </th>
                                                                                                             <th>Approval
@@ -1253,12 +1261,12 @@
                                                                                                             </td>
 
 
-                                                                                                         
 
-                                                                                                           
-                                                                                                          
 
-                                                                                                            
+
+
+
+
                                                                                                             <td>{{e.FitStatus}}
                                                                                                             </td>
                                                                                                             <td>{{e.MDApproval}}
@@ -3525,7 +3533,8 @@
                                                                                     पहला कार्य स्थायी करने में गर्व लेता
                                                                                     है. आपका वेतन
                                                                                     निम्नानुसार निर्धारित
-                                                                                    होता है.</p>
+                                                                                    होता है.
+                                                                                </p>
                                                                                 <p>&emsp;&emsp;&emsp;&emsp;&emsp;वेतन रु
                                                                                     <b><u>{{CommitedCTC|currency:''}}
                                                                                     </b></u> अधिक

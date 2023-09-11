@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label class="col-form-label">Year</label>
-                            <?php $year_start=2021;
+                            <?php $year_start=2023;
                                                  $year_end=date('Y'); // current Year
 
 
@@ -99,6 +99,7 @@
                                         <th>Dept</th>
                                         <th>Designation</th>
                                         <th>Bank&nbsp;Name</th>
+                                        <th>AC&nbsp;HolderName</th>
                                         <th>Accountno</th>
                                         <th>IFSCcode</th>
                                         <th>Branch</th>
@@ -121,6 +122,8 @@
                                     </td>
                                     <td><input type="text" class="form-control" ng-model="searchPayroll.Bankname">
                                     </td>
+                                    <td><input type="text" class="form-control" ng-model="searchPayroll.Empnameaspassbook">
+                                    </td>
                                     <td><input type="text" class="form-control" ng-model="searchPayroll.Accountno">
                                     </td>
                                     <td><input type="text" class="form-control" ng-model="searchPayroll.IFSCcode"></td>
@@ -132,9 +135,11 @@
                                     </td> -->
                                 </tr>
 
+ <tbody >
 
-                                <tr dir-paginate="e in GetBankList |orderBy:sortKeyCustomer:reverseCustomer|filter:searchPayroll|itemsPerPage:10"
-                                    current-page="currentPagePayroll01" pagination-id="PayrollGridAdmin">
+
+                                    <tr dir-paginate="e in GetBankListnew |orderBy:sortKeyCustomer:reverseCustomer|filter:searchPayroll|itemsPerPage:10"
+                                        current-page="currentPagePayroll01" pagination-id="PayrollGridAdmin">
 
                                     <td>
                                         {{$index+1+(currentPagePayroll01 - 1) * pageSizePayroll01}}
@@ -145,6 +150,7 @@
                                     <td>{{e.Department}}</td>
                                     <td>{{e.Designation}}</td>
                                     <td> {{e.Bankname}}</td>
+                                    <td>{{e.Empnameaspassbook}}</td>
                                     <td class="tabletotalrow"> {{e.Accountno}}
                                     </td>
                                     <td> {{e.IFSCcode}}</td>
@@ -156,11 +162,12 @@
                                     <td class="tabletotalrow">
                                         {{e.NetWages--e.Performanceallowance}}</td>
                                 </tr>
-                                <tr style="background-color: yellow;font-weight:bold">
-                                    <td colspan="9" style="text-align:right ;"> Total</td>
+                               
+                             </tbody>
+                              <tr style="background-color: yellow;font-weight:bold">
+                                    <td colspan="10" style="text-align:right ;"> Total</td>
                                     <td>{{GrandTotal}}</td>
                                 </tr>
-
 
                             </table>
                             <dir-pagination-controls pagination-id="PayrollGridAdmin" max-size="3"

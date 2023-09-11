@@ -62,7 +62,7 @@ app.controller('HRM60Controller', function($scope, $http, $timeout) {
                 $scope.Message = true;
                 $scope.Message = "Data Deleted Successfully";
                 $timeout(function() { $scope.Message = ""; }, 3000);
-                $scope.GetAssetcategoryList = $scope.DetailListTemp;
+             //   $scope.GetAssetcategoryList = $scope.DetailListTemp;
                 $scope.Assetcategory = "";
                 $scope.Shortcode = "";
 
@@ -165,6 +165,7 @@ app.controller('HRM60Controller', function($scope, $http, $timeout) {
            
 
             $scope.TempSave();
+            $scope.Getallvalues ();
         });
 
     };

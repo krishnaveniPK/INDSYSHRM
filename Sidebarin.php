@@ -27,10 +27,10 @@ $cpage = strtolower(basename($_SERVER['SCRIPT_NAME'], '.php'));
 
                         </li>
                         <li class='nav-item'>
-                            <a class='nav-link <?=($cpage == 'adddepartment' || $cpage == 'adddesignation' || $cpage == 'addshift' || $cpage == 'addcountry' || $cpage == 'addstate' || $cpage == 'addcity' || $cpage == 'addholiday' || $cpage == 'adddocumenttype' || $cpage == 'addlanguages' || $cpage == 'addrelationship' || $cpage == 'adddegree' || $cpage == 'adddepartmenthead' || $cpage == 'addlocation' || $cpage == 'addcompanydocument') ? 'active' : '' ?>
+                            <a class='nav-link <?=($cpage == 'adddepartment' || $cpage == 'adddesignation' || $cpage == 'addshift' || $cpage == 'addcountry' || $cpage == 'addstate' || $cpage == 'addcity' || $cpage == 'addholiday' || $cpage == 'adddocumenttype' || $cpage == 'addlanguages' || $cpage == 'addrelationship' || $cpage == 'adddegree' || $cpage == 'adddepartmenthead' || $cpage == 'addlocation' || $cpage == 'addcompanydocument' || $cpage=='addbloodgrp' || $cpage=='addeducation' || $cpage=='addeduspecialization') ? 'active' : '' ?>
                                 ' href='#' data-toggle='collapse' aria-expanded='false' data-target='#submenu-2'
                                 aria-controls='submenu-2'><i class='fa fa-cog'></i>Settings</a>
-                            <div id='submenu-2' class='collapse submenu tablink <?=($cpage == 'adddepartment' || $cpage == 'adddesignation' || $cpage == 'addshift' || $cpage == 'addcountry' || $cpage == 'addstate' || $cpage == 'addcity' || $cpage == 'addholiday' || $cpage == 'adddocumenttype' || $cpage == 'addlanguages' || $cpage == 'addrelationship' || $cpage == 'adddegree' || $cpage == 'adddepartmenthead' || $cpage == 'addlocation' || $cpage == 'addcompanydocument') ? 'show' : '' ?>'>
+                            <div id='submenu-2' class='collapse submenu tablink <?=($cpage == 'adddepartment' || $cpage == 'adddesignation' || $cpage == 'addshift' || $cpage == 'addcountry' || $cpage == 'addstate' || $cpage == 'addcity' || $cpage == 'addholiday' || $cpage == 'adddocumenttype' || $cpage == 'addlanguages' || $cpage == 'addrelationship' || $cpage == 'adddegree' || $cpage == 'adddepartmenthead' || $cpage == 'addlocation' || $cpage == 'addcompanydocument' || $cpage=='addbloodgrp' || $cpage=='addeducation' || $cpage=='addeduspecialization') ? 'show' : '' ?>'>
                                 <ul class='nav flex-column'>
                                     <li class='nav-item'>
                                         <a class='nav-link <?=($cpage == 'adddepartment') ? 'active' : '' ?>'
@@ -66,6 +66,20 @@ $cpage = strtolower(basename($_SERVER['SCRIPT_NAME'], '.php'));
                                     <li class='nav-item'>
                                         <a class='nav-link <?=($cpage == 'addholiday') ? 'active' : '' ?>'
                                             href='<?=$domain ?>/HRM08/AddHoliday.php'>Holiday</a>
+                                    </li>
+                                    <li class='nav-item'>
+                                        <a class='nav-link <?=($cpage == 'addbloodgrp') ? 'active' : '' ?>'
+                                            href='<?=$domain ?>/HRM51/AddBloodgrp.php'>Blood Group</a>
+                                    </li>
+
+                                    <li class='nav-item'>
+                                        <a class='nav-link <?=($cpage == 'addeducation') ? 'active' : '' ?>'
+                                            href='<?=$domain ?>/HRM52/Addeducation.php'>Education Mode</a>
+                                    </li>
+
+                                    <li class='nav-item'>
+                                        <a class='nav-link <?=($cpage == 'addeduspecialization') ? 'active' : '' ?>'
+                                            href='<?=$domain ?>/HRM53/AddeduSpecialization.php'>Specialization</a>
                                     </li>
 
                                     <li class='nav-item'>

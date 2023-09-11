@@ -10,14 +10,6 @@
     <?php include '../Headercssin.php'?>
     <title>Application Master</title>
 </head>
-<style>
-body {
-    overflow-y: hidden;
-    /* Hide vertical scrollbar */
-    overflow-x: hidden;
-    /* Hide horizontal scrollbar */
-}
-</style>
 
 <body>
     <!-- ============================================================== -->
@@ -30,12 +22,8 @@ body {
         <div class="dashboard-wrapper" ng-App="MyApp" ng-controller="HRM22Controller">
             <div class="container-fluid ">
 
-
-
-
-
                 <div class="container-fluid dashboard-content">
-                    <div class="row">
+                
                         <div class="col-xl-12">
                             <div class="card">
                                 <h5 class="card-header text-green">Application Creation</h5>
@@ -63,10 +51,10 @@ body {
                                                             <select class="input-group-text surname-width"
                                                                 ng-model="Title">
                                                                 <option Value="Mr.">Mr.</option>
-                                                                <option value="Mrs.">Ms.</option>
-                                                                <option value="Miss.">Mrs.</option>
-
-                                                            </select></span>
+                                                                <option value="Mrs.">Mrs.</option>
+                                                                <option value="Ms.">Ms.</option>
+                                                            </select>
+                                                        </span>
                                                         <input type="text" placeholder="Firstname" class="form-control"
                                                             ng-model="Firstname">
                                                     </div>
@@ -83,8 +71,8 @@ body {
                                                 <div class="form-group col-md-4">
                                                     <label class="col-form-label">Status</label>
                                                     <select class="form-control" ng-model="Selectionstatus">
-                                                        <option Value="Shortlisted"> Shortlisted</option>
-                                                        <option value="On Hold">On Hold</option>
+                                                        <option Value="Shortlisted">Shortlisted</option>
+
                                                         <option value="Rejected">Rejected</option>
                                                         </option>
 
@@ -123,7 +111,7 @@ body {
                                             <select class="form-control" ng-model="Gender">
                                                 <option Value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
+
                                             </select>
 
                                         </div>
@@ -138,12 +126,11 @@ body {
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Martial Status</label>
+                                            <label class="col-form-label">Marital Status</label>
                                             <select class="form-control" ng-model="Married">
-                                                <option Value="Married">Married</option>
-                                                <option value="UnMarried">UnMarried</option>
-                                                <option value="Divorced">Divorced</option>
-                                                <option value="Widow">Widow</option>
+                                                <option ng-repeat="s in GetMaritalstatusList "
+                                                    value="{{s.Maritalstatus}}">
+                                                    {{s.Maritalstatus}}</option>
 
                                             </select>
                                         </div>
@@ -169,16 +156,14 @@ body {
                                             <label class="col-form-label">Contact No</label>
                                             <input type="text" class="form-control" ng-model="Contactno"
                                                 autocomplete="off" onkeypress="return Validate(event);" maxlength="10"
-                                                ng-change="GetContactnounique(Contactno)"
-                                                ng-model-options='{ debounce: 1500 }'>
+                                                ng-change="GetContactnounique(Contactno)">
 
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <label class="col-form-label">Category</label>
                                             <select class="form-control" ng-model="Category">
-                                                <option value="Category 1">Category 1
-                                                </option>
+                                                <option value="Category 1">Category 1 </option>
                                                 <option value="Category 2">Category 2</option>
                                                 <option value="Category 3">Category 3</option>
 
@@ -201,21 +186,32 @@ body {
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Current CTC</label>
+                                            <label class="col-form-label">Current Salary</label>
                                             <input type="text" class="form-control" ng-model="PreviousCTC"
                                                 autocomplete="off" onkeypress="return Validate(event);"
                                                 ng-disabled="btnPrevious">
 
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Expected CTC</label>
+                                            <label class="col-form-label">Expected Salary</label>
                                             <input type="text" class="form-control" ng-model="ExpectedCTC"
                                                 autocomplete="off" onkeypress="return Validate(event);">
 
                                         </div>
+                                        <div class="form-group col-md-3">
+                                            <label class="col-form-label">Other Allowance</label>
+                                            <input type="text" class="form-control" ng-model="Otherallowance"
+                                                autocomplete="off" onkeypress="return Validate(event);">
 
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label class="col-form-label">Experience</label>
+                                            <input type="text" class="form-control" ng-model="Experience"
+                                                autocomplete="off" ng-disabled="btnPrevious">
 
-                                        <div class="form-group col-md-9">
+                                        </div>
+
+                                        <div class="form-group col-md-3">
                                             <label class="col-form-label">Email ID</label>
                                             <input type="email" class="form-control" ng-model="Emailid"
                                                 autocomplete="email" ng-model-options='{ debounce: 1000 }'
@@ -237,17 +233,15 @@ body {
                                         <button class="btn btn-sm btn-rounded btn-success" ng-click="Sendemail();"
                                             ng-show="btnUpdate"><i class="fa fa-save"></i>
                                             Interview Mail</button>
-
-
-
+                                        <button class="btn btn-sm  btn-primary" data-toggle="modal"
+                                            data-target="#ModalCenterUpload"><i class="fa fa-user"></i>
+                                            Add Image</button>
                                         <button class="btn btn-sm btn-rounded btn-success" ng-click="Reset()"><i
                                                 class="fa fa-save"></i>
                                             Reset</button>
-
                                         <button ng-show="btnUpdate" class="btn btn-sm btn-rounded btn-success"
                                             ng-click="FetchApplication(Applicationid);"><i class="fa fa-save"></i>
                                             Refresh</button>
-
                                         <button ng-show="btnMove" class="btn btn-sm btn-rounded btn-success"
                                             ng-click="MoveToCandidate();" ng-disabled="btnsaveadmin2"><i
                                                 class="fa fa-save"></i>
@@ -267,23 +261,25 @@ body {
                                         </h5>
 
                                     </div>
-                                    <?php include '../footerjs.php'?>
-                                    <script src="../Scripts/Controller/HRM22Controller.js"></script>
-                                    <script type="text/javascript">
-                                    function Validate(event) {
-                                        var regex = new RegExp("/^[0-9]{10}+$/");
-
-                                        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
-
-                                        if (!regex.test(key)) {
-                                            event.preventDefault();
-                                            return false;
-                                        }
-
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <?php include 'Addphoto.php'?>
+            </div>
+        </div>
+                                <?php include '../footerjs.php'?>
+                                <script src="../Scripts/Controller/HRM22Controller.js"></script>
+                                <script type="text/javascript">
+                                function Validate(event) {
+                                    var regex = new RegExp("^[0-9-/()]");
+                                    var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+                                    if (!regex.test(key)) {
+                                        event.preventDefault();
+                                        return false;
                                     }
-                                    </script>
-
-
+                                }
+                                </script>
 
 </body>
 

@@ -740,7 +740,13 @@ try
   $ApplicationDate=$form_data['ApplicationDate'];
   $Availableoninterview=$form_data['Availableoninterview'];
    
+  $Reportingname =$form_data['Reportingname'];
+  $ReportingToid =$form_data['ReportingToid'];
 
+  $Business =$form_data['Business'];
+  $Designationproposed =$form_data['Designationproposed'];
+  $Location =$form_data['Location'];
+  $Department =$form_data['Department'];
   if(empty($Dob))
   {
     $Dob ="0000:00:00";
@@ -758,17 +764,17 @@ try
 
 
 
-    if(empty($Address))
-    {
+    // if(empty($Address))
+    // {
   
-      $Message = "Address";
+    //   $Message = "Address";
   
-      $Display=array('Message' =>$Message);
+    //   $Display=array('Message' =>$Message);
    
-      $str = json_encode($Display);
-     echo trim($str, '"');
-     return;
-    }
+    //   $str = json_encode($Display);
+    //  echo trim($str, '"');
+    //  return;
+    // }
 
 /////// DK ////////
 
@@ -785,17 +791,26 @@ CopyCandidateMasterData($conn,$Candidateid,$Clientid);
    Expereienced ='$Expereience',
    Fresher='$Fresher',
    Serving_Notice_Period ='$ServingNoticeperiod',
-   Notice_per=' $NoticePeriod',
+   Notice_per='$NoticePeriod',
    Addormodifydatetime ='$date',
    Userid ='$user_id',
    Languages ='$Languagesknown',
    Address ='$Address',
    Religion='$Religion',
    ApplicationDate ='$ApplicationDate',
+   ReportingTo ='$Reportingname',
+   ReportingToid ='$ReportingToid',
+   Bussiness='$Business',
+   Designationproposed ='$Designationproposed',
+   Location='$Location',
+   Department ='$Department',      
    Availableoninterview ='$Availableoninterview'
-     WHERE Candidateid = ' $Candidateid' AND Clientid ='$Clientid' ";
+     WHERE Candidateid = '$Candidateid' AND Clientid ='$Clientid' ";
   $resultExists01 = $conn->query($resultExists);
+  if($resultExists01===TRUE)
+  {
   $Message ="Update";
+  }
 
   
 //  data_change_email($conn, $Candidateid,$Clientid);
@@ -1632,6 +1647,18 @@ try
 
     }
 
+
+if($Date_Of_Joing=='0000-00-00')
+{
+  $Date_Of_Joing=date("Y-m-d" );
+  $Message = "Date Of Joining";
+
+  $Display=array('Message' =>$Message);
+
+  $str = json_encode($Display);
+ echo trim($str, '"');
+ return;
+}
     if(empty($Date_Of_Joing))
     {
       $Message = "Date Of Joining";
@@ -2172,6 +2199,8 @@ function moveempsalaryupdate($conn,$Candidateid,$Employeeid,$user_id,$date,$Clie
   Other_Allowance = '$Other_Allowance',
   PF_Yesandno='$PF_Yesandno',  
   ESI_Yesandno = '$ESI_Yesandno',
+  ESIOverlimit='No',
+
 
   Addormodifydatetime ='$date',
   Userid ='$user_id'
@@ -2312,6 +2341,8 @@ if ($MethodGet == 'EDUCATIONCAN')
   $UniversityorSchool = $form_data['UniversityorSchool'];
   $GradeorPercentage = $form_data['GradeorPercentage'];
   $Passoutyear = $form_data['Passoutyear'];
+  $EducationMode = $form_data['EducationMode'];
+  $Specialization = $form_data['Specialization'];
 
 
   if (empty($Candidatestudied))
@@ -2342,6 +2373,8 @@ if ($MethodGet == 'EDUCATIONCAN')
       Grade='$GradeorPercentage',
       Passoutyear='$Passoutyear',
       Addormodifydatetime ='$date',
+      EducationMode ='$EducationMode',
+      Specialization='$Specialization',
       Userid ='$user_id'
      
   WHERE Candidateid = '$Candidateid' AND Sno ='$EduNextno'
@@ -2480,6 +2513,8 @@ if($MethodGet == 'FetchStudy')
       $GradeorPercentage = $row['Grade'];
       $Passoutyear =$row['Passoutyear'];
       $Candidatedocument =$row['Candidatedocument'];
+      $EducationMode = $row['EducationMode'];
+      $Specialization = $row['Specialization'];
      
      
      
@@ -2495,7 +2530,9 @@ if($MethodGet == 'FetchStudy')
       'UniversityorSchool'=> $UniversityorSchool,
       'GradeorPercentage'=>  $GradeorPercentage,
       'Passoutyear'=> $Passoutyear,
-      'Candidatedocument'=>$Candidatedocument
+      'Candidatedocument'=>$Candidatedocument,
+      'EducationMode' =>$EducationMode,
+      'Specialization' =>$Specialization
    
      
       
@@ -3296,5 +3333,62 @@ function CopyCandidateEducationData($conn, $Candidateid, $EducationSNo){
  
   }
   ////////////////////////
+  if($MethodGet == 'BLOODGROUP')
+  {
+     $GetState = "SELECT * FROM indsys1055bloodgrpmaster where   Clientid ='$Clientid' ORDER BY BloodGroup   ";
+ 
+     $result_Region = $conn->query($GetState);
+   
+     if(mysqli_num_rows($result_Region) > 0) { 
+     while($row = mysqli_fetch_assoc($result_Region)) {  
+     // $data01[] = array_map('utf8_encode', $row);
+     $data01[] =  $row;
+       } 
+     } 
+     //  echo '<pre>';  print_r($data01);
+     //    exit;
+     header('Content-Type: application/json');
+     echo json_encode($data01);
+ 
+  
+   }
+
+   if($MethodGet == 'EDUCATIONMODE')
+   {
+      $GetState = "SELECT * FROM indsys1056educationmodemaster where Clientid ='$Clientid' ORDER BY EducationMode   ";
+  
+      $result_Region = $conn->query($GetState);
+    
+      if(mysqli_num_rows($result_Region) > 0) { 
+      while($row = mysqli_fetch_assoc($result_Region)) {  
+      // $data01[] = array_map('utf8_encode', $row);
+      $data01[] =  $row;
+        } 
+      } 
+     
+      header('Content-Type: application/json');
+      echo json_encode($data01);
+  
+   
+    }
+
+    if($MethodGet == 'SPECIALIZATION')
+    {
+       $GetState = "SELECT * FROM indsys1057specializationmaster where Clientid ='$Clientid' ORDER BY Specialization   ";
+   
+       $result_Region = $conn->query($GetState);
+     
+       if(mysqli_num_rows($result_Region) > 0) { 
+       while($row = mysqli_fetch_assoc($result_Region)) {  
+       // $data01[] = array_map('utf8_encode', $row);
+       $data01[] =  $row;
+         } 
+       } 
+     
+       header('Content-Type: application/json');
+       echo json_encode($data01);
+   
+    
+     }
 ?>
 

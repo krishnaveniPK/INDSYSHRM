@@ -71,26 +71,7 @@
                                     
                                     <input type="text" class="form-control" ng-model="Selectionstatus"
                                                     autocomplete="off"  readonly >
-                                    <!-- <select class="form-control" ng-model="Selectionstatus">
-                                        <option Value="Appointed">Appointed</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Rejected">Rejected</option>
-                                        <option value="Offer Letter Sent">Offer Letter Sent
-                                        </option>
-                                        <option Value="Waiting For candidate Approval">
-                                            Waiting For Candidate Approval</option>
-                                        <option value="Waiting For MD Approval">Waiting For
-                                            MD Approval</option>
-                                        <option value="Offer Accepted By Candidate">Offer
-                                            Accepted by Candidate
-                                        </option>
-                                        <option value="Offer Rejected by Candidate">Offer
-                                            Rejected by Candidate
-                                        </option>
-                                        <option value="Onboarding">Onboarding</option>
-                                        <option value="Induction">Induction</option>
-
-                                    </select> -->
+                                  
 
                                 </div>
 
@@ -117,12 +98,12 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label class="col-form-label">Married</label>
-                            <select class="form-control" ng-model="Married">
-                                <option Value="Yes">Yes</option>
-                                <option value="No">No</option>
+                        <label class="col-form-label">Marital Status</label>
+                                            <select class="form-control" ng-model="Married">
+                                            <option ng-repeat="s in GetMaritalstatusList " value="{{s.Maritalstatus}}">
+                                                    {{s.Maritalstatus}}</option>
 
-                            </select>
+                                            </select>
                         </div>
 
                         <div class="form-group col-md-3">

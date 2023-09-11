@@ -15,6 +15,8 @@ $Candidatestudied = $_POST['Candidatestudied'];
 $UniversityorSchool = $_POST['UniversityorSchool'];
 $GradeorPercentage = $_POST['GradeorPercentage'];
 $Passoutyear = $_POST['Passoutyear'];
+$Specialization = $_POST['Specialization'];
+$EducationMode = $_POST['EducationMode'];
 
 
 if (isset($_FILES['files']) && !empty($_FILES['files'])) {
@@ -58,7 +60,7 @@ if(!is_dir($directory)){mkdir($directory, 0777);}
                 echo 'File already exists : '.$directory . $_FILES["files"]["name"][$i];
             } else {
                 $img = $_FILES["files"]["name"][$i];
-                $uniquesavename=time().uniqid(rand()).$img;
+                $uniquesavename=time().$img;
                 move_uploaded_file($_FILES["files"]["tmp_name"][$i], $directory .  $uniquesavename);
                
                 $Logofilepath = $directory . $uniquesavename;
@@ -71,16 +73,14 @@ if(!is_dir($directory)){mkdir($directory, 0777);}
       $resultExistsss = "Update indsys1017candidateeducationinformation set 
       Studies ='$Candidatestudied',   
       Universityorschool='$UniversityorSchool',
-      Grade=' $GradeorPercentage',
+      Grade='$GradeorPercentage',
       Passoutyear='$Passoutyear',  
-      Candidatedocument =   '$Logofilepath',   
+      Candidatedocument = '$Logofilepath',   
       Addormodifydatetime ='$date',
-      Userid ='$user_id'
-   
-     
-  WHERE Candidateid = '$Candidateid'  and Sno='$Sno'
-
-  AND Clientid ='$Clientid'  ";
+      Specialization='$Specialization',
+      EducationMode='$EducationMode',
+      Userid ='$user_id'     
+       WHERE Candidateid = '$Candidateid'  and Sno='$Sno' AND Clientid ='$Clientid'  ";
       $resultExists0New = $conn->query($resultExistsss);
       $Message = "Exists";
 
@@ -88,8 +88,8 @@ if(!is_dir($directory)){mkdir($directory, 0777);}
 
   else
   {
-      $sqlsave = "INSERT IGNORE INTO indsys1017candidateeducationinformation (Clientid,Candidateid, Sno,Studies,Universityorschool,Grade,Userid,Addormodifydatetime,Passoutyear,Candidatedocument)
-   VALUES ('$Clientid','$Candidateid','$Sno','$Candidatestudied','$UniversityorSchool','$GradeorPercentage','$user_id','$date','$Passoutyear','$Logofilepath')";
+      $sqlsave = "INSERT IGNORE INTO indsys1017candidateeducationinformation (Clientid,Candidateid, Sno,Studies,Universityorschool,Grade,Userid,Addormodifydatetime,Passoutyear,Candidatedocument,Specialization,EducationMode)
+   VALUES ('$Clientid','$Candidateid','$Sno','$Candidatestudied','$UniversityorSchool','$GradeorPercentage','$user_id','$date','$Passoutyear','$Logofilepath','$Specialization','$EducationMode')";
       $resultsave = mysqli_query($conn, $sqlsave);
 
       $Message = "Exists";

@@ -1,8 +1,11 @@
 <?php 
 include '../config.php';
+
  include 'Payrollsalary.php';
+ 
  require_once ('class.phpmailer.php');
 include ("class.smtp.php");
+
 session_start();
   $user_id = $_SESSION["Userid"];
       $username = $_SESSION["Username"];
@@ -162,7 +165,7 @@ $Category = str_replace(",","','","$Category");     // comma replaced to ','
    
  // added single quote to start and end position
     // comma replaced to ','
-    $GetState = "SELECT * FROM vwemppayrollbanklist where SalMonth='$Payrollmonth' and Salyear='$Payrollyear'  ORDER BY Employeeid ";
+    $GetState = "SELECT * FROM vwemppayrollbanklist where SalMonth='$Payrollmonth' and Salyear='$Payrollyear' AND Clientid='$Clientid' AND NetWages!=0 ORDER BY Employeeid ";
     $result_Region = $conn->query($GetState);
 
   
@@ -1363,7 +1366,7 @@ if($resultExists01 ===TRUE)
          $DailyAllowanance =$rowpayroll['DailyAllowanance'];
          $Performanceallowance = $rowpayroll['Performanceallowance'];
        
-         $Message=CallEmppdatepayroll($conn,$Clientid,$user_id,$date, $Employeeid,$SalMonth, $Salyear,$Workeddays, $Leavedays,$Salary_Advance, $FoodDeduction,$TDS,$Category,$Workingdays,$Nationalholidays, $CL, $BasicDA,$HRA,$Otherallowance_Con_SA , $OT_HRS, $DailyAllowanance,$Performanceallowance);
+         //$Message=CallEmppdatepayroll($conn,$Clientid,$user_id,$date, $Employeeid,$SalMonth, $Salyear,$Workeddays, $Leavedays,$Salary_Advance, $FoodDeduction,$TDS,$Category,$Workingdays,$Nationalholidays, $CL, $BasicDA,$HRA,$Otherallowance_Con_SA , $OT_HRS, $DailyAllowanance,$Performanceallowance);
         }
         }
 }

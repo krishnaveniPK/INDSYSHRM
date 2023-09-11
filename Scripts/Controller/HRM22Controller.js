@@ -2,27 +2,22 @@ var app = angular.module('MyApp', ['angularUtils.directives.dirPagination', 'tex
 app.controller('HRM22Controller', function($scope, $http, $timeout, $filter) {
 
     $scope.Method = "";
-
     $scope.GetMembertypeList = [];
     $scope.currentPageApplication = 1;
     $scope.pageSizeApplication = 10;
     $scope.DetailListTemp = "";
     $scope.TempMessage = "";
-
-
-
-
     $scope.Title = "Mr.";
     $scope.Firstname = "";
     $scope.Lastname = "";
     $scope.Gender = "Male";
     $scope.Qualification = "";
-    $scope.Married = "Yes";
+    $scope.Married = "Married";
     $scope.Mothertongue = "";
     $scope.Contactno = "";
     $scope.Category = "";
     $scope.Emailid = "";
-    $scope.Selectionstatus = "Open";
+    $scope.Selectionstatus = "Shortlisted";
     $scope.Vaccancy = "";
     $scope.ApplicationDate = "";
     $scope.InterviewDate = "";
@@ -34,29 +29,29 @@ app.controller('HRM22Controller', function($scope, $http, $timeout, $filter) {
     $scope.Fresher = "Yes";
     $scope.ExpectedCTC = "0";
     $scope.PreviousCTC = "0";
+    $scope.Otherallowance = "0";
     if ($scope.Fresher == "Yes") {
         $scope.btnPrevious = true;
         $scope.PreviousCTC = "0";
     } else {
         $scope.btnPrevious = false;
     }
-$scope.btnsms = false;
-$scope.btnemail = false;
+    $scope.btnsms = false;
+    $scope.btnemail = false;
 
     $scope.Reset = function() {
         $scope.CheckingSession();
-
         $scope.Title = "Mr.";
         $scope.Firstname = "";
         $scope.Lastname = "";
         $scope.Gender = "Male";
         $scope.Qualification = "";
-        $scope.Married = "Yes";
+        $scope.Married = "Married";
         $scope.Mothertongue = "";
         $scope.Contactno = "";
         $scope.Category = "";
         $scope.Emailid = "";
-        $scope.Selectionstatus = "Open";
+        $scope.Selectionstatus = "Shortlisted";
         $scope.Vaccancy = "";
         $scope.ApplicationDate = "";
         $scope.InterviewDate = "";
@@ -68,8 +63,10 @@ $scope.btnemail = false;
         $scope.Fresher = "Yes";
         $scope.ExpectedCTC = "0";
         $scope.PreviousCTC = "0";
+        $scope.Otherallowance = 0;
+        $scope.Experience = "";
         $scope.btnsms = false;
-$scope.btnemail = false;
+        $scope.btnemail = false;
         $scope.Getnextno();
 
     }
@@ -160,15 +157,11 @@ $scope.btnemail = false;
             $scope.Message = true;
             $scope.Message = "Data Updated Sucessfully";
             $timeout(function() { $scope.Message = ""; }, 3000);
-
-
         }
         if ($scope.TempMessage == "Email") {
             $scope.Message = true;
             $scope.Message = "Please Fill the Email...";
             $timeout(function() { $scope.Message = ""; }, 3000);
-
-
         }
         if ($scope.TempMessage == "Category") {
             $scope.Message = true;
@@ -242,7 +235,7 @@ $scope.btnemail = false;
     ///////////////////////////////////////////////////////
     $scope.FetchApplication = function(Applicationid) {
         $scope.CheckingSession();
-        $scope.selectedValue = [];
+   
         $scope.Applicationid = Applicationid;
         $scope.btnsms = true;
         $scope.btnemail = true;
@@ -276,6 +269,9 @@ $scope.btnemail = false;
             $scope.Fresher = response.data.Fresher;
             $scope.ExpectedCTC = response.data.ExpectedCTC;
             $scope.PreviousCTC = response.data.PreviousCTC;
+            $scope.Otherallowance = response.data.Otherallowance;
+            $scope.Experience = response.data.Experience;
+            $scope.Candidatephoto = response.data.Candidatephoto;
             $scope.GetExpereience($scope.Fresher);
             if ($scope.Emailverified == "Yes")
             {
@@ -288,7 +284,7 @@ $scope.btnemail = false;
             if ($scope.Emailverified == "Yes" && $scope.Smsverified == "Yes") {
                 $scope.btnMove = true;
                 $scope.btnsms = false;
-$scope.btnemail = false;
+                $scope.btnemail = false;
             } else {
                 $scope.btnMove = false;
             }
@@ -355,6 +351,8 @@ $scope.btnemail = false;
                 'Fresher': $scope.Fresher,
                 'ExpectedCTC': $scope.ExpectedCTC,
                 'PreviousCTC': $scope.PreviousCTC,
+                'Otherallowance' : $scope.Otherallowance,
+                'Experience' :$scope.Experience,
                 'Method': 'Save'
             },
 
@@ -548,6 +546,8 @@ $scope.btnemail = false;
                 'Fresher': $scope.Fresher,
                 'ExpectedCTC': $scope.ExpectedCTC,
                 'PreviousCTC': $scope.PreviousCTC,
+                'Otherallowance' : $scope.Otherallowance,
+                'Experience' :$scope.Experience,
                 'Method': 'Update'
             },
             headers: { 'Content-Type': 'application/json' }
@@ -580,9 +580,7 @@ $scope.btnemail = false;
         }).then(function successCallback(response) {
 
 
-            $scope.TempMessage = response.data.Message;
-            // alert(response.data.Message);
-            // $scope.Tempnextno = response.data.Nextno;
+            $scope.TempMessage = response.data.Message;           
             $scope.TempSave();
         });
 
@@ -638,9 +636,7 @@ $scope.btnemail = false;
     $scope.Message = false;
     $scope.GetMailunique(val);
     return true;
-            $scope.Message = false;
-            $scope.GetMailunique(val);
-            return true;
+          
         }
         ////////////////////////////////
     $scope.emailchecking01 = function(email) {
@@ -818,4 +814,68 @@ $scope.btnemail = false;
         $scope.GetCat3ApplicationList = response.data;
     });
     ///////////////////////////
+
+    $http({
+        method: "POST",
+        url: "job.php",
+        data: { 'Method': 'Maritalstatus' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).then(function successCallback(response) {
+        $scope.GetMaritalstatusList = response.data;
+    });
+    //////////////////////
+    $(document).ready(function(e) {
+        $scope.CheckingSession();
+        $('#fileButton01').on('click', function() {
+            var form_data = new FormData();
+            var ins = document.getElementById('fileInput01').files.length;
+            for (var x = 0; x < ins; x++) {
+                form_data.append("files[]", document.getElementById('fileInput01').files[x]);
+            }
+
+            // form_data.append("files", files[i]);
+            form_data.append("Applicationid", $("#Applicationid").val());
+           
+           
+            $.ajax({
+                url: 'Uploadimage.php', // point to server-side PHP script 
+                dataType: 'text', // what to expect back from the PHP script
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response) {
+
+                    alert(response);
+                    $scope.FetchApplication ($scope.Applicationid);
+                    document.getElementById("fileInput01").value = '';
+
+                    $('#msg1').html(response);
+                    setTimeout(function() {
+                        $('#msg1')
+                            .empty().append("");
+
+                        $scope.Message = "";
+                    }, 3000);
+
+                   
+                   
+                },
+                error: function(response) {
+                    alert(response);
+                    $('#msg1').html(response);
+                    setTimeout(function() {
+                        $('#msg1')
+                            .empty().append("");
+
+                        $scope.Message = "";
+                    }, 3000); // display error response from the PHP script
+                }
+            });
+        });
+
+    });
+    ///////////
 });

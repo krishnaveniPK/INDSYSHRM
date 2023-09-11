@@ -30,11 +30,11 @@ include '../session.php';
 
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h5 class="text-green">Asset Category</h5>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-8">
 
                         <table class="CityTable">
                             <tr>
